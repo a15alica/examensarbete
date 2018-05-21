@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Chart Stapel 2</title>
+  <title>Chart Stapel 5</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
@@ -38,12 +38,25 @@
       var kat10 = 0;
       var kat11 = 0;
       var kat12 = 0;
+  
+      var kat1_ = 0;
+      var kat2_ = 0;
+      var kat3_ = 0;
+      var kat4_ = 0;
+      var kat5_ = 0;
+      var kat6_ = 0;
+      var kat7_ = 0;
+      var kat8_ = 0;
+      var kat9_ = 0;
+      var kat10_ = 0;
+      var kat11_ = 0;
+      var kat12_ = 0;
       
       xmlDoc = xml.responseXML;
       x = xmlDoc.getElementsByTagName("year");
       z = xmlDoc.getElementsByTagName("temp3");
       for (i = 0; i < x.length; i++) { 
-        if(x[i].childNodes[0].nodeValue == "1900" || x[i].childNodes[0].nodeValue == "2000"){
+        if(x[i].childNodes[0].nodeValue == "1900"){
           if (z[i].childNodes[0].nodeValue <= -25){
             kat1++;
           }
@@ -81,6 +94,44 @@
             kat12++;
           }
         }
+        if (x[i].childNodes[0].nodeValue == "2000"){
+          if (z[i].childNodes[0].nodeValue <= -25){
+            kat1_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > -25 && z[i].childNodes[0].nodeValue <= -20){
+            kat2_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > -20 && z[i].childNodes[0].nodeValue <= -15){
+            kat3_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > -15 && z[i].childNodes[0].nodeValue <= -10){
+            kat4_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > -10 && z[i].childNodes[0].nodeValue <= -5){
+            kat5_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > -5 && z[i].childNodes[0].nodeValue <= 0){
+            kat6_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > 0 && z[i].childNodes[0].nodeValue <= 5){
+            kat7_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > 5 && z[i].childNodes[0].nodeValue <= 10){
+            kat8_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > 10 && z[i].childNodes[0].nodeValue <= 15){
+            kat9_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > 15 && z[i].childNodes[0].nodeValue <= 20){
+            kat10_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > 20 && z[i].childNodes[0].nodeValue <= 25){
+            kat11_++;
+          }
+          else if (z[i].childNodes[0].nodeValue > 25){
+            kat12_++;
+          }
+        }
       }
 
       drawStartTime = performance.now();
@@ -88,17 +139,22 @@
         type: 'bar',
         data: {
           datasets: [{
-            label: '1900 & 2000',
+            label: '1900',
             data: [kat1, kat2, kat3, kat4, kat5, kat6, kat7, kat8, kat9, kat10, kat11, kat12],
             borderColor: "#c63939",
             backgroundColor: "#c63939"
+          }, {
+            label: '2000',
+            data: [kat1_, kat2_, kat3_, kat4_, kat5_, kat6_, kat7_, kat8_, kat9_, kat10_, kat11_, kat12_],
+            borderColor: "#39c6c6",
+            backgroundColor: "#39c6c6"
           }],
           labels: ['Kallare än -25', '-25 <-> -20', '-20 <-> -15', '-15 <-> -10', '-10 <-> -5', '-5 <-> 0', '0 <-> 5', '5 <-> 10', '10 <-> 15', '15 <-> 20', '20 <-> 25', 'Varmare än 25']
         },
         options: {
           title: {
             display: true,
-            text: 'Temperaturer i Stockholm - 1900 & 2000'
+            text: 'Temperaturer i Stockholm - 1900/2000'
           }
         }
       });
@@ -116,7 +172,7 @@
       scrapedData.push(helaEndTime);
       scrapedData.push(drawStartTime);
       scrapedData.push(drawEndTime);
-      xhttp.open("POST", "http://wwwlab.iit.his.se/a15alica/examensarbete/results/ChartStapel2.php", true);
+      xhttp.open("POST", "http://wwwlab.iit.his.se/a15alica/examensarbete/results/ChartStapel5.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("str=" + scrapedData + "\r\n");
       location.reload();
